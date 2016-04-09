@@ -14,12 +14,12 @@ angular.module('myangular', ['ngRoute'])
 .controller('editController',['$scope', '$http', '$routeParams', '$filter', function($scope, $http, $routeParams, $filter){
 	$scope.id = $routeParams.ind;
 	$scope.update = update;
-	$scope.newPerson = {};
+	$scope.editPerson = {};
 	edit();
 	function edit() {
 		$http.get('/angularjs_bk/api.php?act=get&id=' + $scope.id)
 			.success(function(result) {
-				$scope.newPerson = result;
+				$scope.editPerson = result;
 			})
 			.error(function(data,status){
 				console.log(data);
@@ -29,14 +29,13 @@ angular.module('myangular', ['ngRoute'])
 		$http({
 			method: 'put',
 			url: '/angularjs_bk/api.php?act=put',
-			data: $scope.newPerson
+			data: $scope.editPerson
 		}).success(function(data){
 			//console.log(data);
 			person = $filter('filter')($scope.people, {id: data.id})[0];
 		    index = $scope.people.indexOf(person) ;
 		    $scope.people[index]= data;
 			swal("Updated", "Record has been update!", "success");
-			$scope.newPerson = {};
 		});
 	}
 }])
