@@ -64,7 +64,7 @@ switch ($_REQUEST['act']) {
 	case 'put':
 		try {
 			$data = json_decode(file_get_contents("php://input"));
-			var_dump($data);
+			//var_dump($data);
 			$stmt = $db_connect->prepare("UPDATE people SET firstName=:f_name, lastName=:l_name, email=:email, company=:company WHERE id=:id");
 			$stmt->execute(array(
 				':f_name' => $data->firstName,
@@ -74,11 +74,11 @@ switch ($_REQUEST['act']) {
 				':id' => $data->id
 				));	
 			if($stmt->rowCount() > 0){
-				// $stmt = $db_connect->prepare("SELECT * FROM people WHERE id = ".$data->id);
-			 //    $stmt->execute();
-				// $results = $stmt->fetch(PDO::FETCH_ASSOC);  
-				// echo json_encode($results);
-				echo $data->id;
+				$stmt = $db_connect->prepare("SELECT * FROM people WHERE id = ".$data->id);
+			    $stmt->execute();
+				$results = $stmt->fetch(PDO::FETCH_ASSOC);  
+				echo json_encode($results);
+				//echo $data->id;
 			}else echo "Failed";
 		} catch(PDOException $ex) {
 		    //Something went wrong rollback!

@@ -16,9 +16,9 @@ angular.module('myangular', ['ngRoute'])
 
 	$scope.update = update;
 
-	acitvate();
+	edit();
 
-	function acitvate() {
+	function edit() {
 		$http.get('/angularjs_bk/api.php?act=get&id=' + $scope.id)
 			.success(function(result) {
 				$scope.newPerson = result;
@@ -35,11 +35,11 @@ angular.module('myangular', ['ngRoute'])
 			data: $scope.newPerson
 		}).success(function(data){
 			console.log(data);
-			// person = $filter('filter')($scope.people, {id: data.id})[0];
-		 //    index = $scope.people.indexOf(person) ;
-		 //    $scope.people[index]= data;
-			// swal("Updated", "Record has been update!", "success");
-			// $scope.newPerson = {};
+			person = $filter('filter')($scope.people, {id: data.id})[0];
+		    index = $scope.people.indexOf(person) ;
+		    $scope.people[index]= data;
+			swal("Updated", "Record has been update!", "success");
+			$scope.newPerson = {};
 		});
 	}
 }])
