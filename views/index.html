@@ -1,0 +1,35 @@
+<div class="container marginTop50">
+	<div class="row">
+		<div class="col-md-9 col-sm-12 col-xs-12 animated fadeInUp">
+			<h4 align="center">Welcome to Angularjs</h4>
+			<form class="form-group">
+				<label>Search : </label>
+				<input type="text" class="form-control" ng-model="search" />
+			</form>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-striped">
+					<thead>
+						<tr>
+							<th width="5%">ID</th>
+							<th width="20%">First Name</th>
+							<th width="20%">Last Name</th>
+							<th width="20%">Email</th>
+							<th width="20%">Company Name</th>
+							<th width="20%">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="p in people">
+							<th scope="row">{{p.id }}</th>
+							<td> {{p.firstName }} </td>
+							<td> {{p.lastName}} </td>
+							<td> {{p.email}} </td>
+							<td> {{p.company}} </td>
+							<td> <span class="mybtn edit" ng-click="edit(p)"> Edit</span> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,26 @@
+.mybtn {
+	cursor: pointer;
+}
+.delete:hover {
+	color: #ff0000;
+	text-decoration: underline;
+}
+.edit:hover {
+	color: #e65c00;
+	text-decoration: underline;
+}
+.marginTop10 {
+	margin-top: 10px;
+}
+.marginTop20 {
+	margin-top: 20px;
+}
+.marginTop30 {
+	margin-top: 30px;
+}
+.marginTop40 {
+	margin-top: 40px;
+}
+.marginTop50 {
+	margin-top: 50px;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="myangular">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Angularjs BK</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
+		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+	</head>
+	<body>
+		<div class="contrainer" ng-controller="testController">
+		<!-- Navigation -->
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle Navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a href="#" class="navbar-brand">Angularjs</a>
+					</div>
+					<div class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="#" >HOME</a></li>
+							<li><a ng-href="#">ABOUT US</a></li>
+							<li><a ng-href="#">CONTACT</a></li>
+							<li><a ng-href="#/add-new">ADD EVENT</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- End Navigation -->
+			<!-- Body -->
+			<div class="container marginTop50">
+				<div class="row">
+					<div class="col-md-9 col-sm-12 col-xs-12 animated fadeInUp">
+						<h4 align="center">Welcome to Angularjs</h4>
+						<form class="form-group">
+							<label>Search : </label>
+							<input type="text" class="form-control" ng-model="search" />
+						</form>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover table-striped">
+								<thead>
+									<tr>
+										<th width="5%">ID</th>
+										<th width="20%">First Name</th>
+										<th width="20%">Last Name</th>
+										<th width="20%">Email</th>
+										<th width="20%">Company Name</th>
+										<th width="20%">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="p in people">
+										<th scope="row">{{p.id }}</th>
+										<td> {{p.firstName }} </td>
+										<td> {{p.lastName}} </td>
+										<td> {{p.email}} </td>
+										<td> {{p.company}} </td>
+										<td> <span class="mybtn edit" ng-click="edit(p)"> Edit</span> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<ng-view></ng-view>
+				</div>
+			</div>
+			<!-- END BODY -->
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/angularjs.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/angular-route.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/sweetalert.min.js"></script>
+	</body>
+</html>
