@@ -62,7 +62,7 @@
 										<td> {{p.lastName}} </td>
 										<td> {{p.email}} </td>
 										<td> {{p.company}} </td>
-										<td> <span class="mybtn edit" ng-click="edit(p)"> Edit</span> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
+										<td> <a href="#/edit/{{p.id}}" class="mybtn edit" ng-click="edit(p)"> Edit</a> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
 									</tr>
 								</tbody>
 							</table>

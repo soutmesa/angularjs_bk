@@ -11,12 +11,25 @@ $db_connect->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 $db_connect->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8'");
 
 switch ($_REQUEST['act']) {
-	case 'get':
+	case 'getall':
 		try {
 			$stmt = $db_connect->prepare("SELECT * FROM people");
 			$stmt->execute(); 
 			// return all datas queried object
 			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+			echo json_encode($results);
+		} catch(PDOException $ex) {
+		    //Something went wrong rollback!
+		    echo $ex->getMessage();
+		}
+		break;
+	case 'get':
+		try {
+			$id = $_GET['id'];
+			$stmt = $db_connect->prepare("SELECT * FROM people WHERE id = ".$id);
+			$stmt->execute();
+			// return all datas queried object
+			$results = $stmt->fetch(PDO::FETCH_ASSOC);  
 			echo json_encode($results);
 		} catch(PDOException $ex) {
 		    //Something went wrong rollback!
@@ -61,7 +74,11 @@ switch ($_REQUEST['act']) {
 				':id' => $data->id
 				));	
 			if($stmt->rowCount() > 0){
-				echo "succes";
+				// $stmt = $db_connect->prepare("SELECT * FROM people WHERE id = ".$data->id);
+			 //    $stmt->execute();
+				// $results = $stmt->fetch(PDO::FETCH_ASSOC);  
+				// echo json_encode($results);
+				echo $data->id;
 			}else echo "Failed";
 		} catch(PDOException $ex) {
 		    //Something went wrong rollback!
