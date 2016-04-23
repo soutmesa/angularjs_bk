@@ -30,11 +30,13 @@ angular.module('myangular', ['ui.router'])
     })
     .state('contact', {
       url: "/contact",
-      templateUrl: "views/404.html"
+      templateUrl: "views/404.html",
+      controller: 'testController'
     })
     .state('about', {
       url: "/about",
-      templateUrl: "views/404.html"
+      templateUrl: "views/404.html",
+      controller: 'testController'
     })
 }])
 .controller('editController',['$scope', '$http', '$stateParams', '$filter', function($scope, $http, $stateParams, $filter){
@@ -82,8 +84,12 @@ angular.module('myangular', ['ui.router'])
 		});
 	}
 }])
-.controller('testController', ['$scope', '$http', function($scope, $http){
+.controller('testController', ['$scope', '$http', '$location' , function($scope, $http, $location){
 	$scope.newPerson = {};
+	$scope.isActive = function(viewLocation){
+		var active = (viewLocation === $location.path());
+		return active;
+	}
 	$scope.show = function(){
 		$http.get('/angularjs_bk/api.php?act=getall')
 			.success(function(result) {
