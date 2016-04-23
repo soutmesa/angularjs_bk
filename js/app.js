@@ -1,5 +1,6 @@
 angular.module('myangular', ['ngRoute'])
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+	$locationProvider.html5Mode(true);
 	$routeProvider
 	.when('/add-new', {
 		templateUrl: 'views/add-new.html',

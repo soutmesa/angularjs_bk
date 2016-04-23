@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 		<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+		<base href="/angularjs_bk/">
 	</head>
 	<body>
 		<div class="contrainer" ng-controller="testController">
@@ -28,7 +29,7 @@
 							<li><a href="#" >HOME</a></li>
 							<li><a ng-href="#">ABOUT US</a></li>
 							<li><a ng-href="#">CONTACT</a></li>
-							<li><a ng-href="#/add-new">ADD EVENT</a></li>
+							<li><a ng-href="add-new">ADD EVENT</a></li>
 						</ul>
 					</div>
 				</div>
@@ -62,7 +63,7 @@
 										<td> {{p.lastName}} </td>
 										<td> {{p.email}} </td>
 										<td> {{p.company}} </td>
-										<td> <a href="#/edit/{{p.id}}" class="mybtn edit" ng-click="edit(p)"> Edit</a> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
+										<td> <a href="edit/{{p.id}}" class="mybtn edit" ng-click="edit(p)"> Edit</a> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
 									</tr>
 								</tbody>
 							</table>
