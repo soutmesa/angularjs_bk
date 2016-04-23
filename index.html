@@ -26,10 +26,10 @@
 					</div>
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="#" >HOME</a></li>
-							<li><a ng-href="#">ABOUT US</a></li>
-							<li><a ng-href="#">CONTACT</a></li>
-							<li><a ng-href="add-new">ADD EVENT</a></li>
+							<li><a ui-sref="home" >HOME</a></li>
+							<li><a ui-sref="about">ABOUT US</a></li>
+							<li><a ui-sref="contact">CONTACT</a></li>
+							<li><a ui-sref="addNew">ADD PEOPLE</a></li>
 						</ul>
 					</div>
 				</div>
@@ -63,13 +63,13 @@
 										<td> {{p.lastName}} </td>
 										<td> {{p.email}} </td>
 										<td> {{p.company}} </td>
-										<td> <a href="edit/{{p.id}}" class="mybtn edit" ng-click="edit(p)"> Edit</a> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
+										<td> <a ui-sref="edit({ind: p.id})" class="mybtn edit" ng-click="edit(p)"> Edit</a> | <span class="mybtn delete" ng-click="delete(p.id, $index)">Delete</span> </td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<ng-view></ng-view>
+					<ui-view></ui-view>
 				</div>
 			</div>
 			<!-- END BODY -->
@@ -78,6 +78,7 @@
 		<script type="text/javascript" src="js/angularjs.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/angular-route.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/sweetalert.min.js"></script>
 	</body>

@@ -1,19 +1,44 @@
-angular.module('myangular', ['ngRoute'])
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+angular.module('myangular', ['ui.router'])
+// ngRoute
+// .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+// 	$locationProvider.html5Mode(true);
+// 	$routeProvider
+// 	.when('/add-new', {
+// 		templateUrl: 'views/add-new.html',
+// 		controller: 'insertController'
+// 	})
+// 	.when('/edit/:ind', {
+// 		templateUrl: 'views/edit.html',
+// 		controller: 'editController'
+// 	})
+// 	.otherwise('/');
+// }])
+// ===================================================================================================================================
+.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider){
 	$locationProvider.html5Mode(true);
-	$routeProvider
-	.when('/add-new', {
-		templateUrl: 'views/add-new.html',
-		controller: 'insertController'
-	})
-	.when('/edit/:ind', {
-		templateUrl: 'views/edit.html',
-		controller: 'editController'
-	})
-	.otherwise('/');
+	$urlRouterProvider.otherwise("/");
+	$stateProvider
+    .state('addNew', {
+      url: "/add-new",
+      templateUrl: "views/add-new.html",
+      controller: 'insertController'
+    })
+    .state('edit', {
+      url: "/edit/:ind",
+      templateUrl: "views/edit.html",
+      controller: 'editController'
+    })
+    .state('contact', {
+      url: "/contact",
+      templateUrl: "views/404.html"
+    })
+    .state('about', {
+      url: "/about",
+      templateUrl: "views/404.html"
+    })
 }])
-.controller('editController',['$scope', '$http', '$routeParams', '$filter', function($scope, $http, $routeParams, $filter){
-	$scope.id = $routeParams.ind;
+.controller('editController',['$scope', '$http', '$stateParams', '$filter', function($scope, $http, $stateParams, $filter){
+	$scope.id = $stateParams.ind;
 	$scope.update = update;
 	$scope.editPerson = {};
 	edit();
