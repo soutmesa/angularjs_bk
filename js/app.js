@@ -39,68 +39,69 @@ angular.module('myangular', ['ui.router'])
       controller: 'testController'
     })
 }])
-.controller('editController',['$scope', '$http', '$stateParams', '$filter', function($scope, $http, $stateParams, $filter){
+
+.directive('search', function(){
+	return {
+		template: '<p>hello</p>',
+		replace: true
+	}
+})
+
+.controller('editController',['$scope', '$stateParams', 'peopleFactory','$filter' , function($scope, $stateParams, peopleFactory, $filter){
 	$scope.id = $stateParams.ind;
 	$scope.update = update;
 	$scope.editPerson = {};
-	edit();
-	function edit() {
-		$http.get('/angularjs_bk/api.php?act=get&id=' + $scope.id)
-			.success(function(result) {
-				$scope.editPerson = result;
-			})
-			.error(function(data,status){
-				console.log(data);
-			})
+	
+	function init(){
+		peopleFactory.edit($scope.id, assignPerson);
 	}
-	function update() {
-		$http({
-			method: 'put',
-			url: '/angularjs_bk/api.php?act=put',
-			data: $scope.editPerson
-		}).success(function(data){
-			//console.log(data);
-			person = $filter('filter')($scope.people, {id: data.id})[0];
-		    index = $scope.people.indexOf(person) ;
-		    $scope.people[index]= data;
-			swal("Updated", "Record has been update!", "success");
-		});
+	function assignPerson(result){
+		$scope.editPerson = result;
 	}
+	function update(data){
+		peopleFactory.update($scope.editPerson, renderPeople);
+	}
+
+	function renderPeople(data) {
+		person = $filter('filter')($scope.people, {id: data.id})[0];
+    index = $scope.people.indexOf(person) ;
+    $scope.people[index] = data;
+		swal("Updated", "Record has been update!", "success");
+	}
+	init();
 }])
-.controller('insertController', ['$scope', '$http', function($scope, $http){
+.controller('insertController', ['$scope', '$http', 'peopleFactory', function($scope, $http, peopleFactory){
 	$scope.insert = insert;
+
 	function insert() {
-		$http({
-			method: 'post',
-			url: '/angularjs_bk/api.php?act=post',
-			data:  $scope.newPerson
-		}).success(function(resopne){
-			console.log(resopne);
-			$scope.people.push(resopne);
-			swal("Inserted", "Record has been inserted!", "success");
-			//$location.url('/');
-			console.log($scope.people);
-			$scope.newPerson = {};
-		});
+		if ($scope.frm.$valid) {
+			peopleFactory.insert($scope.newPerson, appendPeople);	
+		}
+	}
+
+	function appendPeople(resopne) {
+		console.log(resopne);
+		$scope.people.push(resopne);
+		swal("Inserted", "Record has been inserted!", "success");
+		console.log($scope.people);
+		$scope.newPerson = {};
 	}
 }])
-.controller('testController', ['$scope', '$http', '$location' , function($scope, $http, $location){
+.controller('testController', ['$scope', '$http', '$location', 'peopleFactory' , function($scope, $http, $location, peopleFactory){
 	$scope.newPerson = {};
 	$scope.isActive = function(viewLocation){
 		var active = (viewLocation === $location.path());
 		return active;
 	}
-	$scope.show = function(){
-		$http.get('/angularjs_bk/api.php?act=getall')
-			.success(function(result) {
-				console.log(result);
-				$scope.people = result;
-			})
-			.error(function(data,status){
-				console.log(data);
-			})
+	
+	function init() {
+		peopleFactory.getPeople(renderPeople);	
 	}
-	$scope.show();
+
+	function renderPeople(result) {
+		$scope.people = result;
+	}
+
 	$scope.delete = function(id, index){
 		swal({
 			title: "Are you sure?",
@@ -113,16 +114,18 @@ angular.module('myangular', ['ui.router'])
 		},
 		function(isConfirm){
 			if(isConfirm){
-				$http({
-					method: 'delete',
-					url: '/angularjs_bk/api.php?act=del&id=' + id
-				}).success(function(resopne){
-					$scope.people.splice(index, 1);
-					swal("Deleted!", "Record has been deleted!", "success");
-				}).error(function(resopne){
-					console.log(resopne);
+				peopleFactory.delete(id).success(function(){
+					removePerson(id, index);
 				});
 			}			
 		});
 	}
+	function removePerson(id, index){
+		$scope.people.splice(index, 1);
+		swal("Deleted!", "Record has been deleted!", "success");
+	}
+	init();
 }]);
+
+
+

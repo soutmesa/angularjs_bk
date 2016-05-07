@@ -1,13 +1,20 @@
 <div class="col-md-3 animated fadeInUp marginTop40">
 	<form class="form-group" name="frm" novalidate>
 		<label>First Name</label>
-		<input type="text" placeholder="First Name" class="form-control" name="firstName" ng-model="newPerson.firstName"/>
+		<input type="text" placeholder="First Name" class="form-control" name="firstName" ng-model="newPerson.firstName" ng-minlength="5" ng-maxlength="20" required/>
+		<div ng-show='frm.firstName.$dirty && frm.firstName.$error.required'>cannot be blank.</div>
+		<div ng-message="minlength">Your field is too short</div>
+	    <div ng-message="maxlength">Your field is too long</div>
+
 		<label class="marginTop10">Last Name</label>
-		<input type="text" placeholder="Last Name" class="form-control" name="lastName" ng-model="newPerson.lastName" />
+		<input type="text" placeholder="Last Name" class="form-control" name="lastName" ng-model="newPerson.lastName" required/>
+		
 		<label class="marginTop10">Email</label>
-		<input type="email" placeholder="Email" class="form-control" name="email" ng-model="newPerson.email" />
+		<input type="email" placeholder="Email" class="form-control" name="email" ng-model="newPerson.email" required/>
+		
 		<label class="marginTop10">Company</label>
 		<input type="text" placeholder="Company" class="form-control" name="company" ng-model="newPerson.company" />
+		
 		<label class="control-label marginTop10">Select File</label>
 		<input id="input-1a" type="file" class="file" data-show-preview="false">
 		<div class="row marginTop10" style="margin-left: 1px;">

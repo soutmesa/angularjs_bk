@@ -1,8 +1,8 @@
 <?php 
 $db_host="localhost";
-$db_name="angularjs";
+$db_name="angularjs_bk";
 $db_user="root";
-$db_pass="";
+$db_pass="P@ssw0rd";
 
 
 $db_connect = new PDO('mysql:host='. $db_host .';dbname='. $db_name .';charset=utf8', $db_user, $db_pass);
